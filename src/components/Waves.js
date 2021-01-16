@@ -23,7 +23,10 @@ export default class Waves extends Component {
     }
   }
 getstandardstatus(){
-  axios.get(global.url+'/getSignupStatus?type=standard' ,{headers:{
+  var body = {
+    type:"standard"
+  }
+  axios.post(global.url+'/getSignupStatus' ,body,{headers:{
     "Authorization": this.state.token,
     "Content-Type":"application/json"
   }}).then(res => {
@@ -45,7 +48,10 @@ getstandardstatus(){
   })
 }
 getpremiumstatus(){
-  axios.get(global.url+'/getSignupStatus?type=premium' ,{headers:{
+  var body = {
+    type:"premium"
+  }
+  axios.post(global.url+'/getSignupStatus',body ,{headers:{
     "Authorization": this.state.token,
     "Content-Type":"application/json"
   }}).then(res => {

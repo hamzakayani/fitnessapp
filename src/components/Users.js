@@ -252,7 +252,7 @@ adduser=()=>{
     "password":this.state.password,
     "foodpreference":this.state.foodpreference,
     "workoutpreference":this.state.workoutpreference,
-    "ispremium":this.state.accounttype==2?true:false,
+    "userType":this.state.accounttype,
     "isValid":true
   }
   if(this.state.firstname!='' && this.state.lastname!='' && this.state.phone!='' && this.state.email!='' && this.state.age!=''
@@ -1053,9 +1053,9 @@ handleClick(index, props) {
                           <select className="btn form-control btn-height border-color btn-border"
                             onChange={(event)=>{this.setState({accounttype:event.target.value});}} value={this.state.accounttype}>
                               <option value="">Account Type *</option>
-                              <option value="3">Free</option>
-                              <option value="1">Standard</option>
-                              <option value="2">Premium</option>
+                              <option value="free">Free</option>
+                              <option value="standard">Standard</option>
+                              <option value="premium">Premium</option>
                           </select>
                         </div>
                       </div>
