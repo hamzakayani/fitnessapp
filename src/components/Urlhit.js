@@ -12,8 +12,8 @@ export default class Urlhit extends Component {
     }
     render() {
         return (
-            <div>
-                test
+            <div style={{padding:20,width:"100%",height:'100%'}}>
+                <h3>This page is for fitnessvwork app email varification.</h3>
             </div>
         )
     }
