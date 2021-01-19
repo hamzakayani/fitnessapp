@@ -10,7 +10,9 @@ import Navi from "./components/Navi";
 import Sidebar from "./components/Sidebar";
 import MealPlan from "./components/MealPlan";
 import ChangePassword from "./components/ChangePassword";
+
 import './App.css';
+import Urlhit from './components/Urlhit';
 export default class App extends Component {
   constructor(props){
     super(props);
@@ -28,6 +30,7 @@ export default class App extends Component {
         <Route path="/mealplan" component={MealPlan}/>
         <Route path="/changepassword" component={ChangePassword}/>
         <Route path="/sidebar" component={Sidebar}/>
+        <Route path="/urlhit" component={Urlhit}/>
       </Switch>
     )
   }
