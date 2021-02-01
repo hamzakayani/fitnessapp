@@ -11,7 +11,9 @@ export default class Waves extends Component {
       token:localStorage.getItem('usertoken'),
       classnamesidebar:'navbar-nav sidebar sidebar-light accordion',
       checkedstandard: false,
-      checkpremium:false
+      checkpremium:false,
+      standardusers:'',
+      premiumusers:''
     };
     if(this.state.token){
       this.getstandardstatus();
@@ -32,7 +34,8 @@ getstandardstatus(){
   }}).then(res => {
       console.log(res.data);
       if(res.data.statusCode===200){
-        this.setState({checkedstandard:res.data.data.status===1?true:false});
+        this.setState({checkedstandard:res.data.data.status===1?true:false,standardusers:res.data.data.count});
+
       }
       else{
         if(res.data.message==='Invalid token. Please login.'){
@@ -57,7 +60,7 @@ getpremiumstatus(){
   }}).then(res => {
     console.log(res.data);
     if(res.data.statusCode===200){
-      this.setState({checkpremium:res.data.data.status===1?true:false});
+      this.setState({checkpremium:res.data.data.status===1?true:false,premiumusers:res.data.data.count});
     }
     else{
       if(res.data.message==='Invalid token. Please login.'){
@@ -146,7 +149,7 @@ togglesidebar=()=>{
               <div style={{padding:20,float:'left',width:'100%'}}>
                 <div style={{float:'left',width:'100%',backgroundColor:'#20adbd',padding:10,marginBottom:10}}>
                   <label style={{float:'left',width:'90%',fontSize:20,marginBottom:0,color:'white'}}>
-                    Standard Membership ({this.state.checkedstandard==true?'Activated':'Deactivated'})
+                    Standard Membership ({this.state.checkedstandard==true?'Activated':'Deactivated'}) (Users : {this.state.standardusers})
                   </label>
                   <Switch
                     checked={this.state.checkedstandard}
@@ -167,7 +170,7 @@ togglesidebar=()=>{
               
                 <div style={{float:'left',width:'100%',backgroundColor:'#27b390',padding:10}}>
                   <label style={{float:'left',width:'90%',fontSize:20,marginBottom:0,color:'white'}}>
-                    Premium Membership ({this.state.checkpremium==true?'Activated':'Deactivated'})
+                    Premium Membership ({this.state.checkpremium==true?'Activated':'Deactivated'}) (Users : {this.state.premiumusers})
                   </label>
                   <Switch
                     checked={this.state.checkpremium}
