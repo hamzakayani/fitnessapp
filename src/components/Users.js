@@ -51,6 +51,7 @@ export default class Users extends Component {
       activeIndex: 0,
       protiens:'',
       calories:'',
+      usertype:''
     };
     if(this.state.token){
       this.getuserbywave();
@@ -145,6 +146,7 @@ stopdays=(id)=>{
 getuserbywave=async()=>{
   var body={
     "limit":10,
+    "type":this.state.usertype,
     "start":this.state.start,
     "name":this.state.search,
     "waveid":this.state.selectedwave
@@ -503,20 +505,15 @@ handleClick(index, props) {
                      Users
                     </h1>
                     {/* <div className="col-md-2 mb-3 responsive emplty-div"></div> */}
-                    <div className="col-md-2 mb-3 responsive fileds-tab" style={{marginLeft:40}}>
-                      {/* <select className="btn form-control btn-height border-color btn-border" 
-                      onChange={(event)=>{this.setState({selectedwave:event.target.value});
-                      setTimeout(() => {
-                        this.getuserbywave();
-                      }, 500)}} 
-                      value={this.state.selectedwave}>
-                        <option value='0' >All</option>
-                      {this.state.dropdownwavedata.map((item,index)=>{
-                        return(
-                          <option value={item.id} key={index}>{item.val}</option>
-                        )
-                      })}
-                      </select> */}
+                    <div className="col-md-2 mb-3 responsive fileds-tab" >
+                      <select className="btn form-control btn-height border-color btn-border"
+                      onChange={(event)=>{this.setState({usertype:event.target.value});
+                      setTimeout(() => { this.getuserbywave()}, 500)}} value={this.state.usertype}>
+                        <option value="">All</option>
+                        <option value="premium">Premium</option>
+                        <option value="standard">Standard</option>
+                        <option value="free">Free</option>
+                      </select>
                     </div>
                     <div className=" col-md-2 mb-3 responsive fileds-tab">
                       <form>
@@ -802,13 +799,12 @@ handleClick(index, props) {
         
                   <div className="table table-scroll">
                     <table className="table table-bordered mb-4" style={{backgroundColor:'#f8f8f8'}}>
-        
                       <thead>
                         <tr style={{textAlign:'center',color:'black'}}>
                           {/* <th className=" text-truncate" style={{fontWeight:'500'}}>Wave</th> */}
                           <th className=" text-truncate" style={{fontWeight:'500'}}>Phase Number</th>
                           <th className=" text-truncate" style={{fontWeight:'500'}}>Gender</th>
-                          <th className=" text-truncate" style={{fontWeight:'500'}}>Premium</th>
+                          <th className=" text-truncate" style={{fontWeight:'500'}}>Type</th>
                           <th className=" text-truncate" style={{fontWeight:'500'}}>Proteins</th>
                           <th className="text-truncate" style={{fontWeight:'500'}}>Calories</th>
                           <th className="text-truncate" style={{fontWeight: '500',textAlign: 'center'}}>Actions</th>
@@ -819,7 +815,7 @@ handleClick(index, props) {
                           {/* <td className="text-truncate">{item.waveName}</td> */}
                           <td className="text-truncate">{item.currentphase}</td>
                           <td className="text-truncate">{this.gendercheck(item.gender)}</td>
-                          <td className="text-truncate">{item.ispremium ? 'true': 'false'}</td>
+                          <td className="text-truncate">{item.usertype}</td>
                           <td className="text-truncate">{parseInt(item.proteinstarget)}g</td>
                           <td className="text-truncate">{parseInt(item.caloriestarget)}</td>
                           <td className="pt-2 text-truncate">
