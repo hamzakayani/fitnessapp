@@ -244,13 +244,16 @@ deleteuser=(id)=>{
   })
 }
 adduser=()=>{
+  console.log('====================================');
+  console.log(this.state.gender);
+  console.log('====================================');
   var body={
     "fname":this.state.firstname,
     "lname":this.state.lastname,
     "mobileNo":this.state.phone,
     "email":this.state.email,
     "age": this.state.age,
-    "gender": this.state.gender=='male'?0:1,
+    "gender": this.state.gender=='1'?0:1,
     "password":this.state.password,
     "foodpreference":this.state.foodpreference,
     "workoutpreference":this.state.workoutpreference,
@@ -1037,7 +1040,11 @@ handleClick(index, props) {
                       <div className="form-group"  style={{width:'48%',float:'left'}}>
                         <div className="input-group">
                           <select className="btn form-control btn-height border-color btn-border"
-                            onChange={(event)=>{this.setState({gender:event.target.value});}} value={this.state.gender}>
+                            onChange={(event)=>{
+                              console.log('====================================');
+                              console.log(event.target.value);
+                              console.log('====================================');
+                              this.setState({gender:event.target.value});}} value={this.state.gender}>
                               <option value="">Select Gender</option>
                               <option value="1">Male</option>
                               <option value="2">Female</option>
@@ -1066,7 +1073,8 @@ handleClick(index, props) {
                         <div className="form-group"  style={{width:'48%',float:'left'}}>
                           <div className="input-group">
                             <input type="text" className="form-control field-text" name="name" placeholder="Workout Preferences *" 
-                            value={this.state.workoutpreference} onChange={e => {this.setState({workoutpreference:e.target.value})}}/>
+                            value={this.state.workoutpreference} onChange={e => {
+                              this.setState({workoutpreference:e.target.value})}}/>
                           </div>
                         </div>
                         </>
